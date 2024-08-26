@@ -11,7 +11,7 @@ Route::get('dashboard', [ChatListController::class ,'index'])
     ->name('dashboard');
 
 Route::get('/chat/{user}', Chat::class)
-    // ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified'])
     ->name('chat');
 
 // Route::view('dashboard', 'dashboard')

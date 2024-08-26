@@ -14,7 +14,7 @@
                     </h1>
                     <ul>
                         @foreach ($users as $user)
-                            <a href="{{ route('chat',$user) }}">
+                            <a wire:navigate href="{{ route('chat',$user) }}">
                                 <li class="list-dist">{{ $user->name }}</li>
                             </a>
                         @endforeach
