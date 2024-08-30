@@ -16,12 +16,14 @@ class Chat extends Component
 
     public function render()
     {
-        return view('livewire.chat',[
-            'messages' => Message::where('from_user_id',auth()->user()->id)
-                ->orWhere('from_user_id',$this->user->id)
-                ->orWhere('to_user_id',auth()->user()->id)
-                ->orWhere('to_user_id',$this->user->id)
-                ->get()
+        return view('livewire.chat', [
+            'messages' => Message::where(function ($query) {
+                $query->where('from_user_id', auth()->user()->id)
+                    ->where('to_user_id', $this->user->id);
+            })->orWhere(function ($query) {
+                $query->where('to_user_id', auth()->user()->id)
+                    ->where('from_user_id', $this->user->id);
+            })->get()
         ]);
     }
 
@@ -35,5 +37,4 @@ class Chat extends Component
 
         $this->reset('message');
     }
-
 }
